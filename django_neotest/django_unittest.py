@@ -63,8 +63,8 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         class DjangoUnittestRunner(CaseUtilsMixin, DiscoverRunner):
             def __init__(self, **kwargs):
-                os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TechStore.settings")
-                django_setup()
+                # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TechStore.settings")
+                # django_setup()
                 DiscoverRunner.__init__(self, **kwargs)
 
             @classmethod
