@@ -19,12 +19,6 @@ from .base import NeotestAdapter, NeotestError, NeotestResultStatus
 
 class CaseUtilsMixin:
     def case_file(self, case) -> str:
-        try:
-            1 / 0
-        except ZeroDivisionError as e:
-            raise Exception(
-                f"--------------------- {str(Path(inspect.getmodule(case).__file__).absolute())}"
-            ) from e
 
         return str(Path(inspect.getmodule(case).__file__).absolute())
 
@@ -45,6 +39,11 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
         path, *child_ids = case_id.split("::")
         if not child_ids:
             child_ids = []
+
+        try:
+            1 / 0
+        except ZeroDivisionError as e:
+            raise Exception(f"--------------------- {os.getcwd()}") from e
 
         # project_name = path.split("/")[-2]
         # os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
