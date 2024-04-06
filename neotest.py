@@ -1,5 +1,5 @@
-from contextlib import contextmanager
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 
 
@@ -14,7 +14,7 @@ def add_to_path():
 
 
 with add_to_path():
-    from neotest_python import main
+    from django-neotest import main
 
 if __name__ == "__main__":
     main(sys.argv[1:])
