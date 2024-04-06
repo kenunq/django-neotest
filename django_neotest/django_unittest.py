@@ -40,11 +40,6 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
         if not child_ids:
             child_ids = []
 
-        # try:
-        #     1 / 0
-        # except ZeroDivisionError as e:
-        #     raise Exception(f"--------------------- {os.getcwd()}") from e
-
         project_name = os.getcwd().split("/")[-1]
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
 
@@ -73,7 +68,6 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         class DjangoUnittestRunner(CaseUtilsMixin, DiscoverRunner):
             def __init__(self, **kwargs):
-                # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TechStore.settings")
                 django_setup()
                 DiscoverRunner.__init__(self, **kwargs)
 
