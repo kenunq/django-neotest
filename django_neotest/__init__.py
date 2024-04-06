@@ -3,7 +3,7 @@ import json
 from enum import Enum
 from typing import List
 
-from neotest_python.base import NeotestAdapter, NeotestResult
+from django_neotest.base import NeotestAdapter, NeotestResult
 
 
 class TestRunner(str, Enum):
