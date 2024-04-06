@@ -10,7 +10,9 @@ function M.is_test_file(file_path)
   end
   local elems = vim.split(file_path, Path.path.sep)
   local file_name = elems[#elems]
-  return vim.startswith(file_name, "test_") or vim.endswith(file_name, "_test.py")
+  return vim.startswith(file_name, "test_")
+    or vim.endswith(file_name, "_test.py")
+    or file_name == "tests.py"
 end
 
 M.module_exists = function(module, python_command)
