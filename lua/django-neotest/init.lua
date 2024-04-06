@@ -1,12 +1,12 @@
 local async = require("neotest.async")
 local lib = require("neotest.lib")
-local base = require("neotest-python.base")
-local pytest = require("neotest-python.pytest")
+local base = require("django-neotest.base")
+local pytest = require("django-neotest.pytest")
 
 local function get_script()
   local paths = vim.api.nvim_get_runtime_file("neotest.py", true)
   for _, path in ipairs(paths) do
-    if vim.endswith(path, ("neotest-python%sneotest.py"):format(lib.files.sep)) then
+    if vim.endswith(path, ("django-neotest%sneotest.py"):format(lib.files.sep)) then
       return path
     end
   end
@@ -60,22 +60,22 @@ local get_runner = function(python_command)
     return "unittest"
   end
   if
-      vim_test_runner and lib.func_util.index({ "unittest", "pytest", "django" }, vim_test_runner)
+    vim_test_runner and lib.func_util.index({ "unittest", "pytest", "django" }, vim_test_runner)
   then
     return vim_test_runner
   end
   local runner = base.module_exists("pytest", python_command) and "pytest"
-      or base.module_exists("django", python_command) and "django"
-      or "unittest"
+    or base.module_exists("django", python_command) and "django"
+    or "unittest"
   stored_runners[command_str] = runner
   return runner
 end
 
 ---@type neotest.Adapter
-local PythonNeotestAdapter = { name = "neotest-python" }
+local PythonNeotestAdapter = { name = "django-neotest" }
 
 PythonNeotestAdapter.root =
-    lib.files.match_root_pattern("pyproject.toml", "setup.cfg", "mypy.ini", "pytest.ini", "setup.py")
+  lib.files.match_root_pattern("pyproject.toml", "setup.cfg", "mypy.ini", "pytest.ini", "setup.py")
 
 function PythonNeotestAdapter.is_test_file(file_path)
   return is_test_file(file_path)
