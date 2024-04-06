@@ -41,6 +41,10 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         project_name = path.split("/")[-2]
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
+        try:
+            1 / 0
+        except ZeroDivisionError as e:
+            raise Exception(f"--------------------- {project_name}{path}") from e
 
         relative_file = os.path.relpath(path, os.getcwd())
         relative_stem = os.path.splitext(relative_file)[0]
