@@ -63,7 +63,7 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         class DjangoUnittestRunner(CaseUtilsMixin, DiscoverRunner):
             def __init__(self, **kwargs):
-                os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TechStore.settings")
+                # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TechStore.settings")
                 django_setup()
                 DiscoverRunner.__init__(self, **kwargs)
 
@@ -118,7 +118,6 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         # Make sure we can import relative to current path
         sys.path.insert(0, os.getcwd())
-        print(os.getcwd())
         # Prepend an executable name which is just used in output
         argv = ["django-neotest"] + self.convert_args(args[-1], args[:-1])
         # parse args
