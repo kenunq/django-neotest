@@ -40,13 +40,13 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
         if not child_ids:
             child_ids = []
 
-        try:
-            1 / 0
-        except ZeroDivisionError as e:
-            raise Exception(f"--------------------- {os.getcwd()}") from e
+        # try:
+        #     1 / 0
+        # except ZeroDivisionError as e:
+        #     raise Exception(f"--------------------- {os.getcwd()}") from e
 
-        # project_name = path.split("/")[-2]
-        # os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
+        project_name = os.getcwd().split("/")[-1]
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
 
         relative_file = os.path.relpath(path, os.getcwd())
         relative_stem = os.path.splitext(relative_file)[0]
