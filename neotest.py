@@ -14,7 +14,7 @@ def add_to_path():
 
 
 with add_to_path():
-    from django-neotest import main
+    from django_neotest import main
 
 if __name__ == "__main__":
     main(sys.argv[1:])
