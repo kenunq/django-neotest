@@ -52,9 +52,9 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         lines = file.readlines()
 
-        for line in lines:
-            if "DJANGO_SETTINGS_MODULE" in line:
-                eval(line)
+        # for line in lines:
+        #     if "DJANGO_SETTINGS_MODULE" in line:
+        #         eval(line)
 
         # project_name = os.getcwd().split("/")[-1]
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"InfoGlobal.settings")
