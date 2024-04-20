@@ -56,13 +56,6 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
             if "DJANGO_SETTINGS_MODULE" in line:
                 eval(line)
 
-        try:
-            q = 1 / 0
-        except ZeroDivisionError as e:
-            raise Exception(
-                f"------------------- {os.environ.get('DJANGO_SETTINGS_MODULE')}"
-            ) from e
-
         # project_name = os.getcwd().split("/")[-1]
         # os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
 
