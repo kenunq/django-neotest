@@ -40,7 +40,10 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
         if not child_ids:
             child_ids = []
 
-        w = os.environ.get("DJANGO_SETTINGS_MODULE")
+        for root, dirs, files in os.walk(os.getcwd()):
+            if "wsgi.py" in files:
+                w = os.path.join(root, "wsgi.py")
+                break
         try:
             q = 1 / 0
         except ZeroDivisionError as e:
