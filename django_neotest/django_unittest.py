@@ -42,15 +42,27 @@ class DjangoNeotestAdapter(CaseUtilsMixin, NeotestAdapter):
 
         for root, dirs, files in os.walk(os.getcwd()):
             if "wsgi.py" in files:
-                w = os.path.join(root, "wsgi.py")
+                file_path = os.path.join(root, "wsgi.py")
                 break
+
+        if not file_path:
+            raise Exception("wsgi.py not found")
+
+        file = open(file_path, "r")
+
+        lines = file.readlines()
+
+        for line in lines:
+            if "DJANGO_SETTINGS_MODULE" in line:
+                eval(line)
+
         try:
             q = 1 / 0
         except ZeroDivisionError as e:
-            raise Exception(f"------------------- {w}") from e
+            raise Exception(f"------------------- {os.environ.get("DJANGO_SETTINGS_MODULE")}") from e
 
-        project_name = os.getcwd().split("/")[-1]
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
+        # project_name = os.getcwd().split("/")[-1]
+        # os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
 
         relative_file = os.path.relpath(path, os.getcwd())
         relative_stem = os.path.splitext(relative_file)[0]
